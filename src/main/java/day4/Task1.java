@@ -19,8 +19,11 @@ public class Task1 {
 
             if (randomNumber > 8) moreEight += 1;
             if (randomNumber == equalOne) equalOne += 1;
-            if (randomNumber % 2 == 0) even += 1;
-            if (randomNumber % 2 != 0) odd += 1;
+            if (randomNumber % 2 == 0) {
+                even += 1;
+            } else {
+                odd += 1;
+            }
             summ += randomNumber;
 
             numbers[i] = randomNumber;

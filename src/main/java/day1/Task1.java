@@ -6,7 +6,7 @@ public class Task1 {
         int count = 0;
         while (count < 9) {
             message += "JAVA" + " ";
-            count = count += 1;
+            count += 1;
         }
 
         System.out.print(message);
