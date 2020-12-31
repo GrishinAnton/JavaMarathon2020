@@ -19,8 +19,8 @@ public class Airplane {
         return "Изготовитель: " + this.producer + ", год выпуска: " + this.year + " , длина: " + this.length + ", вес: " + this.weight + ", количество топлива в баке: " + this.fuel + "";
     }
 
-    public void fillUp(int n) {
-        this.fuel = n;
+    public void setFillUp(int n) {
+        this.fuel += n;
     }
 
     public void setProducer(String producer) {

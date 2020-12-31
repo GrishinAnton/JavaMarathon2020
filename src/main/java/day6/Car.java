@@ -10,11 +10,7 @@ public class Car {
     }
 
     public int yearDifference(int inputYear) {
-        if (inputYear > this.yearOfCreate) {
-            return inputYear - this.yearOfCreate;
-        } else {
-            return this.yearOfCreate - inputYear;
-        }
+        return Math.abs(this.yearOfCreate - inputYear);
     }
 
     public void setColor(String color) {

@@ -14,7 +14,7 @@ public class Teacher {
         return "Преподаватель " + this.name + " оценил студента с именем " + student.getName() + " по предмету " + this.subject + " на оценку " + this.changeRating(randomValue) + ".";
     }
 
-    String changeRating(int value){
+    private String changeRating(int value){
         String rating = "оценка не определена";
         switch (value){
             case 2:
