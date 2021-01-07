@@ -1,9 +1,9 @@
 package day11.task1;
 
 public class Courier implements Worker {
-    int salary;
-    boolean isPayed;
-    Warehouse warehouse;
+    private int salary;
+    private boolean isPayed;
+    private Warehouse warehouse;
 
     public Courier(Warehouse warehouse) {
         this.warehouse = warehouse;
@@ -12,7 +12,7 @@ public class Courier implements Worker {
     @Override
     public void doWork() {
         salary += 100;
-        warehouse.setCountDeliveredOrders(1);
+        warehouse.incrementCountDeliveredOrders(1);
     }
 
     @Override

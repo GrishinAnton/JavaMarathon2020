@@ -12,11 +12,11 @@ public class Warehouse {
                 '}';
     }
 
-    public void setCountPickedOrders(int countPickedOrders) {
+    public void incrementCountPickedOrders(int countPickedOrders) {
         this.countPickedOrders += countPickedOrders;
     }
 
-    public void setCountDeliveredOrders(int countDeliveredOrders) {
+    public void incrementCountDeliveredOrders(int countDeliveredOrders) {
         this.countDeliveredOrders += countDeliveredOrders;
     }
 
