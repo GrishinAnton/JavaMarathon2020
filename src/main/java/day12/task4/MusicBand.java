@@ -3,9 +3,9 @@ package day12.task4;
 import java.util.List;
 
 public class MusicBand {
-    String name;
-    int year;
-    List<String> members;
+    private String name;
+    private int year;
+    private List<String> members;
 
     public MusicBand(String name, int year, List<String> members) {
         this.name = name;

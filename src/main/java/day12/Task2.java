@@ -8,17 +8,15 @@ public class Task2 {
         List<Integer> numberList = new ArrayList<>();
 
         for (int i = 0; i <= 350; i++) {
-            if(i <= 30 && i % 2 == 0){
+            if (i <= 30 && i % 2 == 0) {
                 numberList.add(i);
+                System.out.println(i);
             }
 
-            if(i >= 300 && i <= 350 && i % 2 == 0){
+            if (i >= 300 && i <= 350 && i % 2 == 0) {
                 numberList.add(i);
+                System.out.println(i);
             }
-        }
-
-        for (int i = 0; i < numberList.toArray().length; i++) {
-            System.out.println(numberList.get(i));
         }
     }
 }

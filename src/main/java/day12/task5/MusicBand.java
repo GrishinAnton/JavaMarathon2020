@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MusicBand {
-    String name;
-    int year;
-    List<MusicArtist> members;
+    private String name;
+    private int year;
+    private List<MusicArtist> members;
 
     public MusicBand(String name, int year, List<MusicArtist> members) {
         this.name = name;
@@ -21,7 +21,7 @@ public class MusicBand {
 
     public void printMembers() {
         for (MusicArtist member : this.members) {
-            System.out.println(member.name);
+            System.out.println(member.getName());
         }
     }
 

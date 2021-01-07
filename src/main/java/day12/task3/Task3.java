@@ -26,21 +26,10 @@ public class Task3 {
         List<MusicBand> musicBandList = new ArrayList<>();
 
         for (MusicBand band : bands) {
-            if (band.year >= 2000) {
+            if (band.getYear() >= 2000) {
                 musicBandList.add(band);
             }
         }
-
-        for (MusicBand band : bands) {
-            System.out.println(band);
-        }
-
-        System.out.println("");
-
-        for (MusicBand band : bands) {
-            System.out.println(band.name);
-        }
-
 
         return musicBandList;
     }
