@@ -30,7 +30,7 @@ public class Task3 {
                 }
                 personList.add(new Person(nameArr[0], Integer.parseInt(nameArr[1])));
             }
-
+            scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");
         } catch (Exception e) {

@@ -28,6 +28,8 @@ public class Task2 {
                 }
                 names.add(name);
             }
+
+            scanner.close();
             System.out.println(names);
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");

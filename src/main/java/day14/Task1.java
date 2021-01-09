@@ -32,6 +32,7 @@ public class Task1 {
             for (int i = 0; i < numbers.length; i++) {
                 result += numbers[i];
             }
+            scanner.close();
 
             System.out.println(result);
         } catch (FileNotFoundException e) {

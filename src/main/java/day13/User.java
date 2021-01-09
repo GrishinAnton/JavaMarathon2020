@@ -20,17 +20,11 @@ public class User {
     }
 
     public boolean isFriend(User user){
-        boolean result = false;
-        for (User u: user.subscriptions){
-            if(u.username.equals(this.username)){
-                result = true;
-            }
-        }
-        return result;
+        return this.isSubscribed(user) && user.isSubscribed(this);
     }
 
     public void sendMessage(User user, String text){
-        MessageDatabase.addNewMessage(new User(this.username), user, text);
+        MessageDatabase.addNewMessage(this, user, text);
     }
 
     public String getUsername() {

@@ -14,11 +14,11 @@ public class MessageDatabase {
     }
 
     public static boolean isSender(Message message, User user){
-        return message.getSender().getUsername().equals(user.getUsername());
+        return message.getSender() == user;
     }
 
     public static boolean isReceiver(Message message, User user){
-        return message.getReceiver().getUsername().equals(user.getUsername());
+        return message.getReceiver() == user;
     }
 
     public static void showDialog(User u1, User u2){
