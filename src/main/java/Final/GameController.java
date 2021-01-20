@@ -38,13 +38,12 @@ public class GameController {
         int count = 0;
         //Первый цикл будет по игрокам для сборка кораблей - внутри будут еще циклы
         for (int i = 0; i < this.whatPlayerOrder.size(); i++) {
+            count = 0;
 
             System.out.println(GameConfig.getGreeting(this.whatPlayerOrder.get(i).getName()));
 
             List<String> shipPositionText = GameConfig.getTextForShipsPosition();
             Scanner scanner = new Scanner(System.in);
-
-            //Скорее всего должен быть while с коунтом. И каунт увеличивается только по моему действию. В итоге мы получим бесконечный чмкл, который будет конечный по count = ship.size
 
             while (count < shipPositionText.size()) {
                 List<Ship> currentPlayerShips = this.whatPlayerOrder.get(i).getPlayerShips();
