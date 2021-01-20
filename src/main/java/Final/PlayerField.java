@@ -33,6 +33,7 @@ public class PlayerField {
     }
 
     public boolean checkShipCordsInField(List<String> lineShipPosition) {
+        System.out.println(lineShipPosition.toString());
         for (int i = 0; i < lineShipPosition.size(); i++) {
             String[] line = lineShipPosition.get(i).split(GameConfig.SEPARATOR);
             for (int j = 0; j < line.length; j++) {
@@ -40,6 +41,7 @@ public class PlayerField {
                 int x = Integer.parseInt(numbersString[0]);
                 int y = Integer.parseInt(numbersString[1]);
                 if (x < 0 || y < 0) continue;
+                if (x > 9 || y > 9) continue;
                 if (this.field.get(y).get(x) == FieldCell.SHIP) return false;
             }
         }

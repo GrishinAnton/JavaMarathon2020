@@ -66,7 +66,8 @@ public class GameConfig {
             orderPlayers.add(playerTwo);
 
         } else {
-            Collections.reverse(orderPlayers);
+            orderPlayers.add(playerTwo);
+            orderPlayers.add(playerOne);
         }
         return  orderPlayers;
     }

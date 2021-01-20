@@ -34,7 +34,6 @@ public class GameController {
 
     public void Start() {
         this.Init();
-
         this.whatPlayerOrder = GameConfig.whatPlayerStart(this.playerOne, this.playerTwo);
         //Первый цикл будет по игрокам для сборка кораблей - внутри будут еще циклы
         for (int i = 0; i < this.whatPlayerOrder.size(); i++) {
