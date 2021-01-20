@@ -5,15 +5,8 @@ import Final.Enums.EShip;
 import java.util.*;
 
 public class GameConfig {
-    static final int MAX_XL_SHIP = 1;
-    static final int MAX_L_SHIP = 2;
-    static final int MAX_M_SHIP = 3;
-    static final int MAX_S_SHIP = 4;
-    static final int FIELD_SIZE = 10;
-    static final int PLAYER_COUNT = 2;
     static final String SEPARATOR = ";";
     static final String NUMBER_SEPARATOR = ",";
-
 
     static List<Ship> getPlayerShips() {
         List<Ship> playerShips = new ArrayList<>(
@@ -55,13 +48,13 @@ public class GameConfig {
         return "Начнем расставлять корабля на поле " + player + ". Другой игрок не смотри!";
     }
 
-    static boolean initConfig(){
+    static boolean initConfig() {
         return getPlayerShips().size() == getTextForShipsPosition().size();
     }
 
-    static List<Player> whatPlayerStart(Player playerOne, Player playerTwo){
+    static List<Player> whatPlayerStart(Player playerOne, Player playerTwo) {
         List<Player> orderPlayers = new ArrayList<>();
-        if(Math.round(Math.random()) == 1){
+        if (Math.round(Math.random()) == 1) {
             orderPlayers.add(playerOne);
             orderPlayers.add(playerTwo);
 
@@ -69,6 +62,6 @@ public class GameConfig {
             orderPlayers.add(playerTwo);
             orderPlayers.add(playerOne);
         }
-        return  orderPlayers;
+        return orderPlayers;
     }
 }

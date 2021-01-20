@@ -3,9 +3,9 @@ package Final;
 import java.util.List;
 
 public class Player {
-    String name;
-    PlayerField playerField;
-    List<Ship> playerShips;
+    private String name;
+    private PlayerField playerField;
+    private List<Ship> playerShips;
 
     public Player(String name){
         this.name = name;

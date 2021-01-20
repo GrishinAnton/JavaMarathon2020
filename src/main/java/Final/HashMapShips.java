@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class HashMapShips {
-    Map<String, Ship> hashMap = new HashMap<>();
+    private Map<String, Ship> hashMap = new HashMap<>();
 
     public void setShip(String cords, Ship ship) {
-        String[] cordsArr = cords.split(GameConfig.SEPARATOR);
+        String[] cordsArr = Utils.cordsSeparatorSplit(cords);
         for (int i = 0; i < cordsArr.length; i++) {
             this.hashMap.put(cordsArr[i], ship);
         }

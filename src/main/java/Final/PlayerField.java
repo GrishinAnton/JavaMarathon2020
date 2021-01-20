@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public class PlayerField {
-    List<List<FieldCell>> field = new ArrayList<>();
+    private List<List<FieldCell>> field = new ArrayList<>();
 
     public PlayerField() {
         List<FieldCell> line = new ArrayList<>();
@@ -21,9 +21,9 @@ public class PlayerField {
     }
 
     public void addShipToField(String cords) {
-        String[] cordsArr = cords.split(GameConfig.SEPARATOR);
+        String[] cordsArr = Utils.cordsSeparatorSplit(cords);
         for (int i = 0; i < cordsArr.length; i++) {
-            String[] numbersString = cordsArr[i].split(GameConfig.NUMBER_SEPARATOR);
+            String[] numbersString = Utils.cordNumberSeparatorSplit(cordsArr[i]);
 
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
@@ -33,15 +33,13 @@ public class PlayerField {
     }
 
     public boolean checkShipCordsInField(List<String> lineShipPosition) {
-        System.out.println(lineShipPosition.toString());
         for (int i = 0; i < lineShipPosition.size(); i++) {
-            String[] line = lineShipPosition.get(i).split(GameConfig.SEPARATOR);
+            String[] line = Utils.cordsSeparatorSplit(lineShipPosition.get(i));
             for (int j = 0; j < line.length; j++) {
-                String[] numbersString = line[j].split(GameConfig.NUMBER_SEPARATOR);
+                String[] numbersString = Utils.cordNumberSeparatorSplit(line[j]);
                 int x = Integer.parseInt(numbersString[0]);
                 int y = Integer.parseInt(numbersString[1]);
-                if (x < 0 || y < 0) continue;
-                if (x > 9 || y > 9) continue;
+                if (x < 0 || y < 0 || x > 9 || y > 9) continue;
                 if (this.field.get(y).get(x) == FieldCell.SHIP) return false;
             }
         }

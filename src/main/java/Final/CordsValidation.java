@@ -2,14 +2,14 @@ package Final;
 
 public class CordsValidation {
     static boolean cordsValidation (String cords, Ship ship) {
-        String[] cordsArr = cords.split(GameConfig.SEPARATOR);
+        String[] cordsArr = Utils.cordsSeparatorSplit(cords);
 
         return isCordsValid(cordsArr) && isCordsLengthValid(cordsArr, ship) && isCordsValidShip(cordsArr);
     }
 
     static boolean isCordsValid(String[] cordsArr) {
         for (int i = 0; i < cordsArr.length; i++) {
-            String[] numbersString = cordsArr[i].split(GameConfig.NUMBER_SEPARATOR);
+            String[] numbersString = Utils.cordNumberSeparatorSplit(cordsArr[i]);
             if (numbersString.length != 2) return false;
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
@@ -27,8 +27,8 @@ public class CordsValidation {
         if (cordsArr.length == 1) return true;
 
         for (int i = 0; i < cordsArr.length - 1; i++) {
-            String[] numbersString = cordsArr[i].split(GameConfig.NUMBER_SEPARATOR);
-            String[] numbersString1 = cordsArr[i + 1].split(GameConfig.NUMBER_SEPARATOR);
+            String[] numbersString = Utils.cordNumberSeparatorSplit(cordsArr[i]);
+            String[] numbersString1 = Utils.cordNumberSeparatorSplit(cordsArr[i + 1]);
 
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);

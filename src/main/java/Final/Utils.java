@@ -1,7 +1,6 @@
 package Final;
 
 import Final.Enums.EShip;
-import Final.Enums.FieldCell;
 import Final.Enums.ShipDirection;
 
 import java.util.ArrayList;
@@ -9,8 +8,16 @@ import java.util.List;
 
 public class Utils {
 
+    static String[] cordNumberSeparatorSplit(String cord) {
+        return cord.split(GameConfig.NUMBER_SEPARATOR);
+    }
+
+    static String[] cordsSeparatorSplit(String cords) {
+        return cords.split(GameConfig.SEPARATOR);
+    }
+
     static ShipDirection shipDirection(String cords) {
-        String[] cordsArr = cords.split(GameConfig.SEPARATOR);
+        String[] cordsArr = cordNumberSeparatorSplit(cords);
         ShipDirection direction = ShipDirection.HORIZONTAL;
 
         //Если у нас корабль S - то нам надо horizontal
@@ -18,8 +25,8 @@ public class Utils {
 
         //-1 так как нам не надо поверять последнее значение + 1, такого там не будет
         for (int i = 0; i < cordsArr.length - 1; i++) {
-            String[] numbersString = cordsArr[i].split(GameConfig.NUMBER_SEPARATOR);
-            String[] numbersString1 = cordsArr[i + 1].split(GameConfig.NUMBER_SEPARATOR);
+            String[] numbersString = cordsSeparatorSplit(cordsArr[i]);
+            String[] numbersString1 = cordsSeparatorSplit(cordsArr[i + 1]);
 
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
@@ -34,7 +41,7 @@ public class Utils {
     }
 
     static List<String> cordsRangeGenerate(String cords) {
-        String[] cordsArr = cords.split(GameConfig.SEPARATOR);
+        String[] cordsArr = cordNumberSeparatorSplit(cords);
         List<String> result = new ArrayList<>();
 
         if (cordsArr.length == EShip.S_SHIP.getFieldCount()) {

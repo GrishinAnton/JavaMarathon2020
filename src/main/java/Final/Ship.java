@@ -10,7 +10,7 @@ public class Ship {
     private final int life;
     private int hit = 0;
     private boolean isSink = false;
-    List<String> shipCords = new ArrayList<>();
+    private List<String> shipCords = new ArrayList<>();
 
 
     public Ship(EShip type) {

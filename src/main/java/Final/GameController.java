@@ -9,10 +9,10 @@ import static Final.CordsValidation.cordsValidation;
 
 
 public class GameController {
-    Player playerOne;
-    Player playerTwo;
-    HashMapShips hashMap;
-    List<Player> whatPlayerOrder;
+    private Player playerOne;
+    private Player playerTwo;
+    private HashMapShips hashMap;
+    private List<Player> whatPlayerOrder;
 
     public GameController(String playerOneName, String playerTwoName) {
         this.playerOne = new Player(playerOneName);
