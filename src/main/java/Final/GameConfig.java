@@ -9,6 +9,9 @@ public class GameConfig {
     static final String NUMBER_SEPARATOR = ",";
     static final String SEPARATOR_INVALID = "Вы указали неверный разделитель";
     static final String INVALID_NUMBER = "Укажите числа от 0 до 9";
+    static final String INVALID_CORD_SIZE = "Количество передаваемых координат должно быть равно кол-ву координат коробля";
+    static final String INVALID_CORD_DIRECTION = "Введены непоследовательные координаты";
+    static final String INVALID_CHECK_IN_FIELD = "Вокруг корабля должна быть область шириной в одну клетку, в которой не может быть других кораблей (ореол корабляы";
 
     static List<Ship> getPlayerShips() {
         List<Ship> playerShips = new ArrayList<>(

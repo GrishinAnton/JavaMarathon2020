@@ -102,4 +102,9 @@ public class Utils {
         //Отрезаем последние ;
         return result.substring(0, result.length() - 1);
     }
+
+    static boolean exception(String message){
+        System.out.println(message);
+        return false;
+    }
 }

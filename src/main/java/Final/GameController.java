@@ -60,14 +60,13 @@ public class GameController {
                 List<String> lineShipPosition = Utils.lineShipPositionGenerate(cords, shipDirection);
                 //Делаем проверку на возможность добавить корабль
                 boolean canShipAdd = currentPlayerField.checkShipCordsInField(lineShipPosition);
+                if(!canShipAdd) continue;
 
-                if (canShipAdd) {
-                    currentPlayerField.addShipToField(cords);
-                    //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
-                    hashMap.setShip(cords, currentPlayerShips.get(count));
-                    //Сохраняем на будущее знаение корябля и его ореол, чтобы когда корабль потопим потом сразу достнем все значения
-                    currentPlayerShips.get(count).setShipCords(lineShipPosition);
-                }
+                currentPlayerField.addShipToField(cords);
+                //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
+                hashMap.setShip(cords, currentPlayerShips.get(count));
+                //Сохраняем на будущее знаение корябля и его ореол, чтобы когда корабль потопим потом сразу достнем все значения
+                currentPlayerShips.get(count).setShipCords(lineShipPosition);
 
                 currentPlayerField.print();
 //                hashMap.print();

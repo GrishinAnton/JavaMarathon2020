@@ -40,7 +40,9 @@ public class PlayerField {
                 int x = Integer.parseInt(numbersString[0]);
                 int y = Integer.parseInt(numbersString[1]);
                 if (x < 0 || y < 0 || x > 9 || y > 9) continue;
-                if (this.field.get(y).get(x) == FieldCell.SHIP) return false;
+                if (this.field.get(y).get(x) == FieldCell.SHIP) {
+                    Utils.exception(GameConfig.INVALID_CHECK_IN_FIELD);
+                }
             }
         }
 
