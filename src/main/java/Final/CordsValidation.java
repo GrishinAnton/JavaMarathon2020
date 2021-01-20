@@ -10,11 +10,24 @@ public class CordsValidation {
     static boolean isCordsValid(String[] cordsArr) {
         for (int i = 0; i < cordsArr.length; i++) {
             String[] numbersString = Utils.cordNumberSeparatorSplit(cordsArr[i]);
-            if (numbersString.length != 2) return false;
+            if (numbersString.length != 2) {
+                try {
+                    throw new Exception(GameConfig.SEPARATOR_INVALID);
+                } catch (Exception e){
+                    System.out.println(e);
+                    return false;
+                }
+            };
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
-            if (x > 9 || x < 0) return false;
-            if (y > 9 || y < 0) return false;
+            if (x > 9 || x < 0 || y > 9 || y < 0) {
+                try {
+                    throw new Exception(GameConfig.INVALID_NUMBER);
+                } catch (Exception e) {
+                    System.out.println(e);
+                    return false;
+                }
+            }
         }
         return true;
     }

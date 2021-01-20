@@ -8,16 +8,16 @@ import java.util.List;
 
 public class Utils {
 
-    static String[] cordNumberSeparatorSplit(String cord) {
-        return cord.split(GameConfig.NUMBER_SEPARATOR);
-    }
-
     static String[] cordsSeparatorSplit(String cords) {
         return cords.split(GameConfig.SEPARATOR);
     }
 
+    static String[] cordNumberSeparatorSplit(String cord) {
+        return cord.split(GameConfig.NUMBER_SEPARATOR);
+    }
+
     static ShipDirection shipDirection(String cords) {
-        String[] cordsArr = cordNumberSeparatorSplit(cords);
+        String[] cordsArr = cordsSeparatorSplit(cords);
         ShipDirection direction = ShipDirection.HORIZONTAL;
 
         //Если у нас корабль S - то нам надо horizontal
@@ -25,8 +25,8 @@ public class Utils {
 
         //-1 так как нам не надо поверять последнее значение + 1, такого там не будет
         for (int i = 0; i < cordsArr.length - 1; i++) {
-            String[] numbersString = cordsSeparatorSplit(cordsArr[i]);
-            String[] numbersString1 = cordsSeparatorSplit(cordsArr[i + 1]);
+            String[] numbersString = cordNumberSeparatorSplit(cordsArr[i]);
+            String[] numbersString1 = cordNumberSeparatorSplit(cordsArr[i + 1]);
 
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
@@ -41,7 +41,7 @@ public class Utils {
     }
 
     static List<String> cordsRangeGenerate(String cords) {
-        String[] cordsArr = cordNumberSeparatorSplit(cords);
+        String[] cordsArr = cordsSeparatorSplit(cords);
         List<String> result = new ArrayList<>();
 
         if (cordsArr.length == EShip.S_SHIP.getFieldCount()) {
@@ -61,8 +61,8 @@ public class Utils {
         String firstLine = "";
         String middleLine = "";
         String lastLine = "";
-        String[] numbersString = cordsRange.get(0).split(GameConfig.NUMBER_SEPARATOR);
-        String[] numbersString1 = cordsRange.get(1).split(GameConfig.NUMBER_SEPARATOR);
+        String[] numbersString = Utils.cordNumberSeparatorSplit(cordsRange.get(0));
+        String[] numbersString1 = Utils.cordNumberSeparatorSplit(cordsRange.get(1));
 
         int x = Integer.parseInt(numbersString[0]);
         int y = Integer.parseInt(numbersString[1]);

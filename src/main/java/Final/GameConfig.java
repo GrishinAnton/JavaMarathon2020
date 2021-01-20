@@ -7,6 +7,8 @@ import java.util.*;
 public class GameConfig {
     static final String SEPARATOR = ";";
     static final String NUMBER_SEPARATOR = ",";
+    static final String SEPARATOR_INVALID = "Вы указали неверный разделитель";
+    static final String INVALID_NUMBER = "Укажите числа от 0 до 9";
 
     static List<Ship> getPlayerShips() {
         List<Ship> playerShips = new ArrayList<>(

@@ -35,6 +35,7 @@ public class GameController {
     public void Start() {
         this.Init();
         this.whatPlayerOrder = GameConfig.whatPlayerStart(this.playerOne, this.playerTwo);
+        int count = 0;
         //Первый цикл будет по игрокам для сборка кораблей - внутри будут еще циклы
         for (int i = 0; i < this.whatPlayerOrder.size(); i++) {
 
@@ -43,15 +44,17 @@ public class GameController {
             List<String> shipPositionText = GameConfig.getTextForShipsPosition();
             Scanner scanner = new Scanner(System.in);
 
-            for (int j = 0; j < shipPositionText.size(); j++) {
+            //Скорее всего должен быть while с коунтом. И каунт увеличивается только по моему действию. В итоге мы получим бесконечный чмкл, который будет конечный по count = ship.size
+
+            while (count < shipPositionText.size()) {
                 List<Ship> currentPlayerShips = this.whatPlayerOrder.get(i).getPlayerShips();
                 PlayerField currentPlayerField = this.whatPlayerOrder.get(i).getPlayerField();
-                currentPlayerField.print();
 
-                System.out.println(shipPositionText.get(j));
+                System.out.println(shipPositionText.get(count));
                 String cords = scanner.nextLine();
                 //Проверяем корректность введенных данных
-                boolean isShipValid = cordsValidation(cords, currentPlayerShips.get(j));
+                boolean isCordsValid = cordsValidation(cords, currentPlayerShips.get(count));
+                if(!isCordsValid) continue;
                 //Узнает какое направление у корабля
                 ShipDirection shipDirection = Utils.shipDirection(cords);
                 //Вычесляем линии для ореола
@@ -62,13 +65,14 @@ public class GameController {
                 if (canShipAdd) {
                     currentPlayerField.addShipToField(cords);
                     //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
-                    hashMap.setShip(cords, currentPlayerShips.get(j));
+                    hashMap.setShip(cords, currentPlayerShips.get(count));
                     //Сохраняем на будущее знаение корябля и его ореол, чтобы когда корабль потопим потом сразу достнем все значения
-                    currentPlayerShips.get(j).setShipCords(lineShipPosition);
+                    currentPlayerShips.get(count).setShipCords(lineShipPosition);
                 }
 
                 currentPlayerField.print();
-                hashMap.print();
+//                hashMap.print();
+                count++;
             }
         }
 
@@ -77,3 +81,4 @@ public class GameController {
 
     }
 }
+
