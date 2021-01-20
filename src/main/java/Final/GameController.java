@@ -9,60 +9,72 @@ import static Final.CordsValidation.cordsValidation;
 
 
 public class GameController {
-    String playerOneName;
-    String playerTwoName;
-    PlayerField playerOneField;
-    PlayerField playerTwoField;
-    List<Ship> playerOneShips;
-    List<Ship> playerTwoShips;
+    Player playerOne;
+    Player playerTwo;
     HashMapShips hashMap;
-    String whatPlayerStart;
+    List<Player> whatPlayerOrder;
 
-    public GameController(String name1, String name2) {
-        this.playerOneName = name1;
-        this.playerTwoName = name2;
+    public GameController(String playerOneName, String playerTwoName) {
+        this.playerOne = new Player(playerOneName);
+        this.playerTwo = new Player(playerTwoName);
     }
 
     private void Init() {
-        this.playerOneField = new PlayerField();
-        this.playerTwoField = new PlayerField();
+        this.playerOne.setPlayerField(new PlayerField());
+        this.playerTwo.setPlayerField(new PlayerField());
 
-        this.playerOneShips = GameConfig.getPlayerShips();
-        this.playerTwoShips = GameConfig.getPlayerShips();
+        this.playerOne.setPlayerShips(GameConfig.getPlayerShips());
+        this.playerTwo.setPlayerShips(GameConfig.getPlayerShips());
 
         this.hashMap = new HashMapShips();
+
+        //Можно перед запросом проверять, что кол-во кораблей равно кол-ву текста и если нет, выплевывать ошибку при старте программы
+        boolean initConfig = GameConfig.initConfig();
     }
 
     public void Start() {
         this.Init();
 
-        this.whatPlayerStart = Math.round(Math.random()) == 1 ? this.playerOneName : this.playerTwoName;
-        System.out.println(GameConfig.getGreeting(this.whatPlayerStart));
+        this.whatPlayerOrder = GameConfig.whatPlayerStart(this.playerOne, this.playerTwo);
+        //Первый цикл будет по игрокам для сборка кораблей - внутри будут еще циклы
+        for (int i = 0; i < this.whatPlayerOrder.size(); i++) {
 
-        List<String> shipPositonText = GameConfig.getTextForShipsPosition();
-        Scanner scanner = new Scanner(System.in);
+            System.out.println(GameConfig.getGreeting(this.whatPlayerOrder.get(i).getName()));
 
-        for (int i = 0; i < shipPositonText.size(); i++) {
-            System.out.println(shipPositonText.get(i));
-            String cords = scanner.nextLine();
-            //Проверяем корректность введенных данных
-            boolean isShipValid = cordsValidation(cords, this.playerOneShips.get(i));
-            //Узнает какое направление у корабля
-            ShipDirection shipDirection = Utils.shipDirection(cords);
-            //Вычесляем линии для ореола
-            List<String> lineShipPosition = Utils.lineShipPositionGenerate(cords, shipDirection);
-            //Делаем проверку на возможность добавить корабль
-            boolean canShipAdd = this.playerOneField.checkShipCordsInField(lineShipPosition);
+            List<String> shipPositionText = GameConfig.getTextForShipsPosition();
+            Scanner scanner = new Scanner(System.in);
 
-            if(canShipAdd){
-                this.playerOneField.addShipToField(cords);
-                //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
-                hashMap.setShip(cords, this.playerOneShips.get(i));
-                //Сохраняем на будущее знаение корябля и его ореол, чтобы когда корабль потопим потом сразу достнем все значения
-                this.playerOneShips.get(i).setShipCords(lineShipPosition);
+            for (int j = 0; j < shipPositionText.size(); j++) {
+                List<Ship> currentPlayerShips = this.whatPlayerOrder.get(i).getPlayerShips();
+                PlayerField currentPlayerField = this.whatPlayerOrder.get(i).getPlayerField();
+                currentPlayerField.print();
+
+                System.out.println(shipPositionText.get(j));
+                String cords = scanner.nextLine();
+                //Проверяем корректность введенных данных
+                boolean isShipValid = cordsValidation(cords, currentPlayerShips.get(j));
+                //Узнает какое направление у корабля
+                ShipDirection shipDirection = Utils.shipDirection(cords);
+                //Вычесляем линии для ореола
+                List<String> lineShipPosition = Utils.lineShipPositionGenerate(cords, shipDirection);
+                //Делаем проверку на возможность добавить корабль
+                boolean canShipAdd = currentPlayerField.checkShipCordsInField(lineShipPosition);
+
+                if (canShipAdd) {
+                    currentPlayerField.addShipToField(cords);
+                    //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
+                    hashMap.setShip(cords, currentPlayerShips.get(j));
+                    //Сохраняем на будущее знаение корябля и его ореол, чтобы когда корабль потопим потом сразу достнем все значения
+                    currentPlayerShips.get(j).setShipCords(lineShipPosition);
+                }
+
+                currentPlayerField.print();
+                hashMap.print();
             }
         }
 
-        this.playerOneField.print();
+        //Второй цикл уже будет по самой игре
+
+
     }
 }

@@ -33,7 +33,6 @@ public class Utils {
         return direction;
     }
 
-
     static List<String> cordsRangeGenerate(String cords) {
         String[] cordsArr = cords.split(GameConfig.SEPARATOR);
         List<String> result = new ArrayList<>();

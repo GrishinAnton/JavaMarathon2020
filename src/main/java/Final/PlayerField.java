@@ -11,9 +11,9 @@ public class PlayerField {
 
     public PlayerField() {
         List<FieldCell> line = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             line.add(FieldCell.EMPTY);
-            if (i != 0 && i % 10 == 0) {
+            if (i % 10 == 0) {
                 this.field.add(line);
                 line = new ArrayList<>();
             }
