@@ -11,12 +11,12 @@ public class CordsValidation {
         for (int i = 0; i < cordsArr.length; i++) {
             String[] numbersString = Utils.cordNumberSeparatorSplit(cordsArr[i]);
             if (numbersString.length != 2) {
-                Utils.exception(GameConfig.SEPARATOR_INVALID);
+                return Utils.exception(GameConfig.SEPARATOR_INVALID);
             }
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
             if (x > 9 || x < 0 || y > 9 || y < 0) {
-                Utils.exception(GameConfig.INVALID_NUMBER);
+                return Utils.exception(GameConfig.INVALID_NUMBER);
             }
         }
         return true;
@@ -24,7 +24,7 @@ public class CordsValidation {
 
     static boolean isCordsLengthValid(String[] cordsArr, Ship ship) {
         if (ship.getLife() != cordsArr.length) {
-            Utils.exception(GameConfig.INVALID_CORD_SIZE);
+            return Utils.exception(GameConfig.INVALID_CORD_SIZE);
         }
         return true;
     }
@@ -43,7 +43,7 @@ public class CordsValidation {
             int y1 = Integer.parseInt(numbersString1[1]);
 
             if (x == x1 && y + 1 != y1 || y == y1 && x + 1 != x1) {
-                Utils.exception(GameConfig.INVALID_CORD_DIRECTION);
+                return Utils.exception(GameConfig.INVALID_CORD_DIRECTION);
             }
         }
         return true;
