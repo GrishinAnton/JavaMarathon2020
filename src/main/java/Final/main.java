@@ -6,5 +6,6 @@ public class main {
 
         GameController gameController = new GameController("Anton", "Sergei");
         gameController.Start();
+
     }
 }

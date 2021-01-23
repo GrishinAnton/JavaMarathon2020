@@ -53,14 +53,14 @@ public class GameController {
                 String cords = scanner.nextLine();
                 //Проверяем корректность введенных данных
                 boolean isCordsValid = cordsValidation(cords, currentPlayerShips.get(count));
-                if(!isCordsValid) continue;
+                if (!isCordsValid) continue;
                 //Узнает какое направление у корабля
                 ShipDirection shipDirection = Utils.shipDirection(cords);
                 //Вычесляем линии для ореола
                 List<String> lineShipPosition = Utils.lineShipPositionGenerate(cords, shipDirection);
                 //Делаем проверку на возможность добавить корабль
                 boolean canShipAdd = currentPlayerField.checkShipCordsInField(lineShipPosition);
-                if(!canShipAdd) continue;
+                if (!canShipAdd) continue;
 
                 currentPlayerField.addShipToField(cords);
                 //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
@@ -74,9 +74,36 @@ public class GameController {
             }
         }
 
-        //Второй цикл уже будет по самой игре
 
+        //Переключатель очередности хода
+        int whatPlayerMove = 0;
+        //couте++ count-- или ничего не делаем если ход не переходит
+        while (hasPlayerShip(this.whatPlayerOrder.get(whatPlayerMove))) {
 
+            Scanner scanner = new Scanner(System.in);
+            String cord = scanner.nextLine();
+
+            //Можно пойти на поле. Если там не корабля, то говорить мимо
+            // И ПЕРЕДАВАТЬ ХОД
+            //1. Если там корабля, то идти в хешмапу и забирать корабль
+            //2. Потом добавлять выстел в корабль и смотреть что возвращает корабль - потопил или попал
+            //3. Когда попал, то после добавления попадания мыможем проверить потоплен корабль или нет,
+            //4. если потоплен, то надо забрать из коробля все координаты и обновить карту
+            //5. Далее просто идем дальше по циклу
+
+        }
+
+        //Если из цикла вышли, значит понимая кто был последний активный игрок тот и победил
+
+    }
+
+    private boolean hasPlayerShip(Player player){
+        for (int i = 0; i < player.getPlayerShips().size(); i++) {
+            //Если хоть один не потоплен, то true
+            if(!player.getPlayerShips().get(i).getIsSink()) return true;
+        }
+        //Если все потоплены то false
+        return false;
     }
 }
 
