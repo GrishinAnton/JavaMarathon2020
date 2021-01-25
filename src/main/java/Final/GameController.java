@@ -1,5 +1,6 @@
 package Final;
 
+import Final.Enums.FieldCell;
 import Final.Enums.ShipDirection;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class GameController {
         this.playerOne.setPlayerShips(GameConfig.getPlayerShips());
         this.playerTwo.setPlayerShips(GameConfig.getPlayerShips());
 
-        this.hashMap = new HashMapShips();
+        this.playerOne.setHashMap(new HashMapShips());
+        this.playerTwo.setHashMap(new HashMapShips());
 
         //Можно перед запросом проверять, что кол-во кораблей равно кол-ву текста и если нет, выплевывать ошибку при старте программы
         boolean initConfig = GameConfig.initConfig();
@@ -62,9 +64,9 @@ public class GameController {
                 boolean canShipAdd = currentPlayerField.checkShipCordsInField(lineShipPosition);
                 if (!canShipAdd) continue;
 
-                currentPlayerField.addShipToField(cords);
+                currentPlayerField.addValueToField(cords, FieldCell.SHIP);
                 //Положить кординаты в хешмагу вместе с кораблем, чтобы во время выстрела сразу доставать нужный корабль
-                hashMap.setShip(cords, currentPlayerShips.get(count));
+                this.whatPlayerOrder.get(i).getHashMap().setShip(cords, currentPlayerShips.get(count));
                 //Сохраняем на будущее знаение корябля и его ореол, чтобы когда корабль потопим потом сразу достнем все значения
                 currentPlayerShips.get(count).setShipCords(lineShipPosition);
 
@@ -76,24 +78,45 @@ public class GameController {
 
 
         //Переключатель очередности хода
-        int whatPlayerMove = 0;
-        //couте++ count-- или ничего не делаем если ход не переходит
-        while (hasPlayerShip(this.whatPlayerOrder.get(whatPlayerMove))) {
+        int whatPlayerAttack = 0;
+        int whatPlayerDefender = 1;
+        //couт++ count-- или ничего не делаем если ход не переходит
+        while (hasPlayerShip(this.whatPlayerOrder.get(whatPlayerDefender))) {
+            System.out.println(hasPlayerShip(this.whatPlayerOrder.get(whatPlayerDefender)));
+            System.out.println(this.whatPlayerOrder.get(whatPlayerDefender).getName());
+            System.out.println(whatPlayerAttack+"whatPlayerAttack");
+            System.out.println(whatPlayerDefender+"whatPlayerDefender");
 
+            System.out.println("Ход игрока: "+this.whatPlayerOrder.get(whatPlayerAttack).getName());
             Scanner scanner = new Scanner(System.in);
             String cord = scanner.nextLine();
+            FieldCell hitValue =  this.whatPlayerOrder.get(whatPlayerDefender).getPlayerField().getCellValue(cord);
 
-            //Можно пойти на поле. Если там не корабля, то говорить мимо
-            // И ПЕРЕДАВАТЬ ХОД
-            //1. Если там корабля, то идти в хешмапу и забирать корабль
-            //2. Потом добавлять выстел в корабль и смотреть что возвращает корабль - потопил или попал
-            //3. Когда попал, то после добавления попадания мыможем проверить потоплен корабль или нет,
-            //4. если потоплен, то надо забрать из коробля все координаты и обновить карту
-            //5. Далее просто идем дальше по циклу
+            if(hitValue != FieldCell.SHIP){
+                this.whatPlayerOrder.get(whatPlayerDefender).getPlayerField().addValueToField(cord, FieldCell.HIT);
+                System.out.println("Мимо");
+                whatPlayerAttack = whatPlayerAttack == 0 ? 1: 0;
+                whatPlayerDefender = whatPlayerAttack == 0 ? 1: 0;;
+                continue;
+            }
+
+            Ship ship = this.whatPlayerOrder.get(whatPlayerDefender).getHashMap().getShip(cord);
+            //Возвращает что с кораблем случилось
+            String shipHit = ship.addHit();
+            System.out.println(shipHit);
+            if(ship.getIsSink()){
+                for (int i = 0; i < ship.getShipCords().size(); i++) {
+                    this.whatPlayerOrder.get(whatPlayerDefender).getPlayerField().addValueToField(ship.getShipCords().get(i), FieldCell.HIT);
+                }
+            } else {
+                this.whatPlayerOrder.get(whatPlayerDefender).getPlayerField().addValueToField(cord, FieldCell.HIT);
+            }
+
+            this.whatPlayerOrder.get(whatPlayerDefender).getPlayerField().print();
+            continue;
 
         }
-
-        //Если из цикла вышли, значит понимая кто был последний активный игрок тот и победил
+        System.out.println("Конец! Победил игрок: "+ this.whatPlayerOrder.get(whatPlayerAttack).getName());
 
     }
 

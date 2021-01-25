@@ -18,6 +18,10 @@ public class Ship {
         this.type = type;
     }
 
+    public int getLife() {
+        return life;
+    }
+
     public String addHit() {
         this.hit += 1;
 
@@ -28,12 +32,12 @@ public class Ship {
         return "Утопил!";
     }
 
-    public boolean getIsSink() {
-        return this.isSink;
+    public List<String> getShipCords() {
+        return shipCords;
     }
 
-    public int getLife() {
-        return life;
+    public boolean getIsSink() {
+        return this.isSink;
     }
 
     public void setShipCords(List<String> shipCords) {

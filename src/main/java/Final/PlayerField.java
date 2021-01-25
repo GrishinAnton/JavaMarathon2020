@@ -20,16 +20,25 @@ public class PlayerField {
         }
     }
 
-    public void addShipToField(String cords) {
+    public void addValueToField(String cords, FieldCell value) {
         String[] cordsArr = Utils.cordsSeparatorSplit(cords);
         for (int i = 0; i < cordsArr.length; i++) {
             String[] numbersString = Utils.cordNumberSeparatorSplit(cordsArr[i]);
 
             int x = Integer.parseInt(numbersString[0]);
             int y = Integer.parseInt(numbersString[1]);
+            if (x < 0 || y < 0 || x > 9 || y > 9) continue;
 
-            this.field.get(y).set(x, FieldCell.SHIP);
+            this.field.get(y).set(x, value);
         }
+    }
+
+    public FieldCell getCellValue(String cord) {
+        String[] numbersString = Utils.cordNumberSeparatorSplit(cord);
+        int x = Integer.parseInt(numbersString[0]);
+        int y = Integer.parseInt(numbersString[1]);
+
+        return this.field.get(y).get(x);
     }
 
     public boolean checkShipCordsInField(List<String> lineShipPosition) {

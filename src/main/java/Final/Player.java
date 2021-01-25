@@ -6,6 +6,11 @@ public class Player {
     private String name;
     private PlayerField playerField;
     private List<Ship> playerShips;
+    private HashMapShips hashMap;
+
+    public HashMapShips getHashMap() {
+        return hashMap;
+    }
 
     public Player(String name){
         this.name = name;
@@ -25,6 +30,10 @@ public class Player {
 
     public PlayerField getPlayerField() {
         return playerField;
+    }
+
+    public void setHashMap(HashMapShips hashMap) {
+        this.hashMap = hashMap;
     }
 
     public List<Ship> getPlayerShips() {
